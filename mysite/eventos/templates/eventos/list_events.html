@@ -1,0 +1,81 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Eventos</title>
+    <link rel="stylesheet" href="{% static 'css/list_events.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <!-- Bloque para mostrar mensajes de éxito o error -->
+    {% if messages %}
+        <div id="message" class="alert alert-success">
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        </div>
+    {% endif %}
+    <!-- Aquí va el resto del contenido de tu tabla/lista -->
+
+    <div class="container">
+        <h1>Lista de Eventos</h1>
+        
+        <div class="actions">
+            <input type="text" id="search" placeholder="Buscar eventos...">
+            <a href="{% url 'create_event' %}" class="button">Registrar Nuevo Evento</a>
+        </div>
+        
+        <table id="eventsTable">
+            <thead>
+                <tr>
+                    <th>Id del Evento</th>
+                    <th>Nombre del Evento</th>
+                    <th>Fecha</th>
+                    <th>Capacidad</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for event in events %}
+                <tr>
+                    <td>{{ event.event_id }}</td>
+                    <td>{{ event.name_event }}</td>
+                    <td>{{ event.event_date }}</td>
+                    <td>{{ event.max_capacity }}</td>
+                    <td>
+                        <a href="{% url 'list_events' event.event_id %}" class="button">Editar</a>
+                    <a href="{% url 'delete_event' event.event_id %}" class="button delete">Eliminar</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4">No hay eventos disponibles.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Filtrar eventos en la tabla
+        $(document).ready(function(){
+            $("#search").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#eventsTable tbody tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+
+        // Espera 3 segundos y luego oculta el mensaje
+        setTimeout(function() {
+            var messageDiv = document.getElementById('message');
+            if (messageDiv) {
+                messageDiv.style.display = 'none';
+            }
+        }, 3000);  // 3000 milisegundos = 3 segundos
+    </script>
+</body>
+</html>

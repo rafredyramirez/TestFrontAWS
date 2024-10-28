@@ -1,0 +1,6 @@
+services:
+  django:
+    build: .
+    ports:
+      - "80:80"
+    restart: on-failure

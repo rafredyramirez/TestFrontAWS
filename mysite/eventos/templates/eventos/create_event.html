@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Evento</title>
+    <link rel="stylesheet" href="{% static 'css/create_event.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Crear Nuevo Evento</h1>
+        <form method="post" action="{% url 'create_event' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="event_id">ID Evento:</label>
+                <input type="text" id="event_id" name="event_id" required>
+            </div>
+
+            <div class="form-group">
+                <label for="name_event">Nombre del Evento:</label>
+                <input type="text" id="name_event" name="name_event" required>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Descripción:</label>
+                <textarea id="description" name="description" rows="4" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="event_date">Fecha del Evento:</label>
+                <input type="date" id="event_date" name="event_date" required>
+            </div>
+
+            <div class="form-group">
+                <label for="event_time">Hora del Evento:</label>
+                <input type="time" id="event_time" name="event_time" required>
+            </div>
+
+            <div class="form-group">
+                <label for="max_capacity">Capacidad Máxima:</label>
+                <input type="number" id="max_capacity" name="max_capacity" required>
+            </div>
+
+            <div class="form-group">
+                <label for="organizer">Organizador:</label>
+                <input type="text" id="organizer" name="organizer" required>
+            </div>
+
+            <div class="form-group">
+                <label for="event_status">Estado del Evento:</label>
+                <select id="event_status" name="event_status" required>
+                    <option value="Activo">Activo</option>
+                    <option value="Inactivo">Inactivo</option>
+                    <option value="Finalizado">Finalizado</option>
+                    <option value="SoldOut">Sold Out</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="event_location">Ubicación del Evento:</label>
+                <input type="text" id="event_location" name="event_location" required>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="button">Crear Evento</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

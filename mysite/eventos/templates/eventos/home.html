@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Gestión de Eventos</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Bienvenido a la Gestión de Eventos</h1>
+        <p>Selecciona una opción para continuar:</p>
+        <div class="options">
+            <a href="{% url 'list_events' %}" class="button">Gestionar Eventos</a>
+            <a href="{% url 'register_event' %}" class="button">Gestionar Asistentes</a>
+        </div>
+    </div>
+</body>
+</html>
